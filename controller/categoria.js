@@ -13,7 +13,8 @@ module.exports = app => {
    })
    app.post(rota, (req, res) => {
       console.log(req.body)
-      Categoria.adiciona(req.body, res)
+      let valores = req.body
+      Categoria.adiciona(valores, res)
    })
    //PUT??
    app.patch((rota+'/:id'),(req, res) =>{

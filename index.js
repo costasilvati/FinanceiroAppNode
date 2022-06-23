@@ -7,8 +7,8 @@
 // npm install express-form-data
 // Comando para iniciar a aplicação: npm start
 const customExpress = require('./config/customExpress')
-const conexao = require('./infra/connection')
-const Tabelas = require('./infra/tabelas')
+const conexao = require('./infra/postgreconnection')
+const Tabelas = require('./infra/postgreTabelas')
 const app = customExpress()
 
 conexao.connect(erro => {

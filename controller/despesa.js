@@ -1,8 +1,6 @@
 const { json } = require('body-parser')
 const Despesa = require('../model/despesa')
 const rota = '/despesa'
-const date = require('date-and-time');
-date.locale
 
 module.exports = app => {
    app.get(rota, (req, res) => {

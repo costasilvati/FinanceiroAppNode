@@ -1,15 +1,19 @@
 //const res = require('express')
-const conexao = require('../infra/connection')
+const conexao = require('../infra/postgreconnection')
 
 class Categoria{
 
-    adiciona(login, res){
-        let sql = 'INSERT INTO categoria SET ?'
-        conexao.query(sql,login,(erro, resultado)=> {
+    adiciona(categoria, res){
+        const sql = {
+            name: 'fetch-user',
+            text: 'INSERT INTO categoria values (default,$1, $2) RETURNING *',
+            values: [categoria.nome, categoria.descricao],
+          }
+        conexao.query(sql, (erro, resultado)=> {
             if(erro){
                 res.status(400).json(resultado)
             }else{
-                res.status(200).json(resultado)
+                res.status(200).json(resultado.rows)
             }
         })
     }
@@ -20,29 +24,37 @@ class Categoria{
             if(erro){
                 res.status(400).json(erro)
             }else{
-                res.status(200).json(resultado)
+                res.status(200).json(resultado.rows)
             }
         })
     }
 
     buscaPorId(id, res){
-        let sql = 'SELECT * FROM categoria WHERE id_categoria_pk=?'// ? = 1
-        conexao.query(sql,id,(erro, resultado)=>{
+        const sql = {
+            name: 'fetch-user',
+            text: 'SELECT * FROM categoria WHERE id_categoria_pk= $1',
+            values: [id],
+          }
+        conexao.query(sql,(erro, resultado)=>{
             if(erro){
                 res.status(400).json(erro)
             }else{
-                res.status(200).json(resultado)
+                res.status(200).json(resultado.rows)
             }
         })
     }
 
     altera(id, valores, res){
-        let sql = 'UPDATE categoria SET ? WHERE id_categoria_pk = ?'
-        conexao.query(sql,[valores, id],(erro, resultado)=>{
+        const sql = {
+            name: 'fetch-user',
+            text: 'UPDATE categoria SET nome=$1,descricao=$2 WHERE id_categoria_pk=$3',
+            values: [valores.nome,valores.descricao,id],
+          }
+        conexao.query(sql,(erro, resultado)=>{
             if(erro){
                 res.status(400).json(erro)
             }else{
-                res.status(200).json(resultado)
+                res.status(200).json(resultado.rows)
             }
         })
     }

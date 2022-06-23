@@ -1,11 +1,11 @@
-const mysql = require('mysql')
+const postgre = require('postgres')
 
-const conexao = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"sql12345",
-    port:3306,
-    database:"aulanode2"
+const conexao = postgre.createConnection({
+    host: "localhost", //"ec2-52-71-23-11.compute-1.amazonaws.com",
+    user: "postgres",//"bxxemwuyoqnowg",
+    password: "sql12345",//"531ef2c6cd91a14869b53bd435ca6e36747c665e515afb79012629d9950e2754",
+    port:5432,
+    database:"aulanode"//"davooggpn1042d"
 })
 
 module.exports = conexao
